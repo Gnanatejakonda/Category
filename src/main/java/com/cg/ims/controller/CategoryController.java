@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cg.ims.dto.CategoryDTO;
+import com.cg.ims.dto.ProductDTO;
 import com.cg.ims.exception.CategoryException;
 import com.cg.ims.service.ICategoryServiceImpl;
 
@@ -28,6 +29,7 @@ import io.swagger.annotations.ApiOperation;
 @RequestMapping("/category")
 @CrossOrigin("*")
 public class CategoryController {
+	
 	@Autowired
 	ICategoryServiceImpl categoryService;
 
@@ -69,6 +71,14 @@ public class CategoryController {
         return new ResponseEntity<>(category, HttpStatus.OK);
     }
   
+    
+    @GetMapping("/oneCategoryProducts/{category}")
+    public ResponseEntity<List<ProductDTO>> productsOfOneCat(@PathVariable("category") String category) throws CategoryException {
+        List<ProductDTO> oneCatProcusts = categoryService.getProdctsOfOneCategory(category);
+        return new ResponseEntity<>(oneCatProcusts, HttpStatus.OK);
+    }
+    
+    
 	@GetMapping("/eurekha")
 	public String name() {
 		return "eurekha";

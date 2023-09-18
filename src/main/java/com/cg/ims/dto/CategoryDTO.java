@@ -2,17 +2,20 @@ package com.cg.ims.dto;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="ims_category")
+@Table(name="CategoryTabel")
 public class CategoryDTO {
 	@Id
 	@Column(name="catId")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int catId;
 	
-	@Column(name="catName")
+	@Column(name="catName", unique=true)
 	private String catName;
 	public CategoryDTO(int catId, String catName) {
 		super();
